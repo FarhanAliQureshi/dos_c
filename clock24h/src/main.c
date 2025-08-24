@@ -29,6 +29,8 @@ int main(void)
     prev_cursor_shape = _gettextcursor();
     _settextcursor(NO_CURSOR);
     _clearscreen(_GCLEARSCREEN);
+    _settextposition(25,  3); _outtext("Program by Farhan Ali Qureshi");
+    _settextposition(25, 58); _outtext("Press any key to exit");
     // print_clock_at(font, row, 88, 88, 88);       // Reset clock.
 
     // Display clock and wait for user to press any key to exit.
