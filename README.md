@@ -37,12 +37,23 @@ I wrote these programs and utilities, when I was a teenager in the 90s, for MS-D
 ![Screenshot of Guess The Number Game](/assets/images/guess_number.png)
 
 #### Today (Current Date and Time)
+This was the last program to run in `AUTOEXEC.BAT` (before migrating to Windows 95). The `AUTOEXEC.BAT` structure would be as following:
+```batch
+@ECHO OFF
+REM ...other settings, programs, drivers, and utilities...
+BISM.EXE
+CLS
+TODAY.EXE
+```
+
 ![Screenshot of Today's Current Date and Time](/assets/images/today.png)
 
 #### Calculate Weekday of a Date
 ![Screenshot of Weekday of a Date](/assets/images/weekday.png)
 
 #### Bismillah (Text-based Calligraphy)
+This was the second-last program to run in `AUTOEXEC.BAT` before migrating to Windows 95.
+
 ![Screenshot of Bismillah Calligraphy](/assets/images/bismillah.png)
 
 #### Name of Allah (Text-based Calligraphy)
@@ -87,7 +98,7 @@ I wrote these programs and utilities, when I was a teenager in the 90s, for MS-D
 
 ![Screenshot of Telephone Directory's Delete Record](/assets/images/phonedb_delete.png)
 
-**Search in Names**
+**Search by Name**
 
 ![Screenshot of Telephone Directory's Search in Names](/assets/images/phonedb_search_name.png)
 
@@ -106,3 +117,6 @@ I wrote these programs and utilities, when I was a teenager in the 90s, for MS-D
 
 ## Lost Projects
 There are many projects files which are probably lost forever due to corrupted copies of backup. I'll try to search and look in other backups. If I find more source code then I'll add them here.
+
+## License
+Copyright © 1990-2025 by Farhan Ali Qureshi. View the [MIT LICENSE](LICENSE) file for details.
