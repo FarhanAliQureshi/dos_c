@@ -59,31 +59,40 @@ I wrote these programs and utilities, when I was a teenager in the 90s, for MS-D
 
 #### Text-based Tic Tac Toe (Game)
 **Main Menu**
+
 ![Screenshot of Tic Tac Toe Menu](/assets/images/tictactoe_menu.png)
 
 **Gameplay of Human vs Human**
+
 ![GIF of Tic Tac Toe, Gameplay of Human vs Human](/assets/images/tictacto_human_vs_human.gif)
 
 **Gameplay of Human vs Computer**
+
 ![GIF of Tic Tac Toe, Gameplay of Human vs Computer](/assets/images/tictacto_human_vs_computer.gif)
 
 #### Telephone Directory Database
 **Menu**
+
 ![Screenshot of Telephone Directory's Menu](/assets/images/phonedb_menu.png)
 
 **Add Record**
+
 ![Screenshot of Telephone Directory's Add Record](/assets/images/phonedb_add.png)
 
 **Edit Record**
+
 ![Screenshot of Telephone Directory's Edit Record](/assets/images/phonedb_edit.png)
 
 **Delete Record**
+
 ![Screenshot of Telephone Directory's Delete Record](/assets/images/phonedb_delete.png)
 
 **Search in Names**
+
 ![Screenshot of Telephone Directory's Search in Names](/assets/images/phonedb_search_name.png)
 
 **Database Information**
+
 ![Screenshot of Telephone Directory's Database Information](/assets/images/phonedb_database_info.png)
 
 #### Simple 24 Hours Digital Clock
@@ -94,3 +103,6 @@ I wrote these programs and utilities, when I was a teenager in the 90s, for MS-D
 
 #### Extra Large 24 Hours Digital Clock
 ![GIF of Extra Large 24 Hours Digital Clock](/assets/images/clk24hxl.gif)
+
+## Lost Projects
+There are many projects files which are probably lost forever due to corrupted copies of backup. I'll try to search and look in other backups. If I find more source code then I'll add them here.
