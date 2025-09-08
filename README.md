@@ -1,5 +1,5 @@
 # DOS C Programs and Utilities
-I wrote these programs and utilities, when I was a teenager in the 90s, for MS-DOS 5.0 and MS-DOS 6.22 etc. I used Turbo C and later Turbo C++. I'll port each program to Open Watcom C 2.0, add comments, and refactor code. Add a Makefile, and after testing them using FreeDOS or DOSBox, I'll add it here.
+I wrote these programs and utilities, when I was a teenager in the 90s, for MS-DOS 5.0 and MS-DOS 6.22 etc. I used Turbo C and later Turbo C++. I'll port each program to Open Watcom C/C++ 2.0, add comments, maybe refactor code, and add a Makefile. After testing programs in FreeDOS or DOSBox, I'll add it here.
 
 ## Projects
 | Project | Name | Notes |
@@ -40,7 +40,7 @@ I wrote these programs and utilities, when I was a teenager in the 90s, for MS-D
 This was the last program to run in `AUTOEXEC.BAT` (before migrating to Windows 95). The `AUTOEXEC.BAT` structure would be as following:
 ```batch
 @ECHO OFF
-REM ...other settings, programs, drivers, and utilities...
+REM ...settings, programs, drivers, and utilities...
 BISM.EXE
 CLS
 TODAY.EXE
@@ -52,11 +52,14 @@ TODAY.EXE
 ![Screenshot of Weekday of a Date](/assets/images/weekday.png)
 
 #### Bismillah (Text-based Calligraphy)
-This was the second-last program to run in `AUTOEXEC.BAT` before migrating to Windows 95.
+There was a version of this program without my name on it, which I compiled as a Tiny memory model (.COM file). I built it for my dad's office computer. Soon it was circulating in many offices and businesses' computers in Islamabad. On our home computer, this was the second-last program to run in `AUTOEXEC.BAT` before migrating to Windows 95.
 
 ![Screenshot of Bismillah Calligraphy](/assets/images/bismillah.png)
 
 #### Name of Allah (Text-based Calligraphy)
+> [!NOTE]
+> I couldn't find the `gettext()` function (Turbo C's `CONIO.H`) or similar function in Open Watcom C/C++. Therefore, I rewrite that piece of code by directly accessing memory of Text-mode screen memory. However, I tried to keep the vibe of the original code.
+
 ![GIF of Name of Allah Calligraphy](/assets/images/allah.gif)
 
 #### ASCII Character-set Table
@@ -114,6 +117,63 @@ This was the second-last program to run in `AUTOEXEC.BAT` before migrating to Wi
 
 #### Extra Large 24 Hours Digital Clock
 ![GIF of Extra Large 24 Hours Digital Clock](/assets/images/clk24hxl.gif)
+
+## Why I ported all projects to Open Watcom?
+Turbo C/C++ is no longer maintained. I searched for a FOSS C/C++ compiler which is still in active development, and can produce 16-bit x86 real-mode executables. 
+
+DGJPP is a really good project and I acknowledge the efforts to bring modern versions of GCC to DOS. However, it produces 32-bit DOS executable files, targeting Intel 80386 or later processors.
+
+The Open Watcom C/C++ is close enough to Turbo C/C++. There are some differences in libraries, and some functions are missing, however, I was able to work around the obstacles. Though, I had to refactor and rewrite code during the porting process. However, I am glad that I put in the effort. Now anyone can compile and produce executable files which can still work in DOS on Intel 80286 (and earlier processors). If anyone wishes then they can extend functionality using later versions of C (specifically C99, or perhaps in future, newer versions of C).
+
+**Note:** I have admiration for Watcom C/C++, when in the 90s, I learned that one of my favorite games, DOOM, was written using it. 
+
+## Build Tools
+Download Open Watcom v2.0 (or later) from [https://openwatcom.org/](https://openwatcom.org/) official website, or from [https://github.com/open-watcom/open-watcom-v2/](https://github.com/open-watcom/open-watcom-v2/) official GitHub repository. Most likely the projects will compile with Open Watcom v1.9, however, it is not tested as I used v2.0 for compiling and testing.
+
+* **Open Watcom C/C++16 Compile and Link Utility (`WCL.EXE`):** 
+I used the `WCL` for simple compilation in the `Makefile`. I used v2.0 Beta 1 of `WCL`.
+
+* **Open Watcom Make (`WMAKE.EXE`):** 
+I used the `WMake` utility for the `Makefile`. I wrote a simple `MAKE.BAT` file because I have a habit of writing `make` instead of `wmake`. I used v2.0 Beta 1 of `WMake`.
+
+* **Open Watcom Debugger (`WD.EXE`):** 
+I used v2.0 Beta 1 of the `WD` for debugging.
+
+> [!CAUTION]
+> If you want to use Visual Studio Code (or any other modern editor) to modify any source file then I'll recommend changing the encoding of (reopening and saving) that source file to `DOS CP-437`. Especially when the source code is using extended ASCII characters.
+
+> [!TIP]
+> In the Visual Studio Code, click on the `UTF-8` (or similar current file encoding) in the lower-right corner of the status bar to change the reopening and saving encoding of the currently opened file.
+
+## How to build?
+Each project directory has its own `Makefile` in it. Run `MAKE.BAT` to run `WMake` (or directly run `WMake`) to build the targets in the `Makefile`.
+
+#### Source Files
+In a project's directory, the source files and header files are in the `SRC` sub-directory.
+
+#### Compile a Debug Executable
+In a project's directory, run command `make` to build a debuggable executable file using the `Makefile`. The executable file will be in the `BUILD` sub-directory.
+
+#### Run the Executable
+In a project's directory, run command `make run` to run the executable file. If the executable file doesn't exist then the `Make` utility will try to first build the executable and then run it.
+
+#### Debug the Executable
+In a project's directory, run command `make debug` to launch the executable file in the Watcom Debugger. If the executable file doesn't exist then the `Make` utility will try to first build the executable before launching Watcom Debugger.
+
+> [!NOTE]
+> You can debug a release version of the executable. However, debuggable executable will be much easier, as it will include source code and other information, which will help to add proper breakpoints and watches.
+
+#### Strip the Executable
+In a project's directory, run command `make strip` to run `WSTRIP.EXE` on the executable file. It will strip away debuggable and unnecessary information from the executable file (for example from the debuggable executable file. If the executable file doesn't exist then the `Make` utility will try to first build the executable and then run `WStrip` on it.
+
+> [!NOTE]
+> `Strip` will automatically execute when the target `Release` is run (see below).
+
+#### Compile a Release Executable
+In a project's directory, run command `make release` to build a production ready executable. All the debugging and any other excess information will be stripped away from the final executable. The executable file will be in the `BUILD` sub-directory.
+
+#### Clean
+In a project's directory, run command `make clean` to clean all files which were generated from the source files (executable file, OBJ files, and other files generated during compilation and linking).
 
 ## Lost Projects
 There are many projects files which are probably lost forever due to corrupted copies of backup. I'll try to search and look in other backups. If I find more source code then I'll add them here.
